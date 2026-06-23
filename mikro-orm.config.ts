@@ -12,6 +12,12 @@ export default defineConfig({
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
+
+  driverOptions: {
+  connection: {
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  },
+},
   
   entities: ['./dist/entities/**/*.js'], 
   entitiesTs: ['./src/entities/**/*.ts'],
